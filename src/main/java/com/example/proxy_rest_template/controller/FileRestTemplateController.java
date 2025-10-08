@@ -40,57 +40,16 @@ public class FileRestTemplateController {
         Files.write(Paths.get("123.txt"), imageBytes);
     }
 
-//    public String downloadFile(String fileUrl, String destinationPath) throws IOException {
-//        File downloadedFile = restTemplate.execute(fileUrl, HttpMethod.GET, null, clientHttpResponse -> {
-//            File tempFile = new File(destinationPath);
-//            StreamUtils.copy(clientHttpResponse.getBody(), new FileOutputStream(tempFile));
-//            return tempFile;
-//        });
-//        return "File downloaded to: " + downloadedFile.getAbsolutePath();
-//    }
-
     @GetMapping("/test-download-v2")
     public void download2() throws IOException {
         postRestService.downloadFile("https://cloudspringloadzip-80c5fd137b1c.herokuapp.com/api/files/download/123.txt", "./download");
     }
-
-//    public void uploadFile(String uploadUrl, String filePath) {
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-//
-//        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-//        body.add("file", new FileSystemResource(new File(filePath)));
-//        // You can add other form fields if needed:
-//        // body.add("description", "A description of the file");
-//
-//        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-//
-//        String response = restTemplate.postForObject(uploadUrl, requestEntity, String.class);
-//        System.out.println("Upload response: " + response);
-//    }
 
     @PostMapping("/test-upload-v1")
     public String uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
         postRestService.uploadFile("https://cloudspringloadzip-80c5fd137b1c.herokuapp.com/api/files/upload", "123.txt");
         return "File uploaded to: " + file.getOriginalFilename();
     }
-
-//    public void uploadFile(String uploadUrl, MultipartFile file) {
-//        RestTemplate restTemplate = new RestTemplate();
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-//
-//        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-//        body.add("file", new MultipartFileResource(file));
-//        // body.add("description", "A description of the file");
-//
-//        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-//
-//        String response = restTemplate.postForObject(uploadUrl, requestEntity, String.class);
-//        System.out.println("Upload response: " + response);
-//    }
 
     @PostMapping("/upload")
     public ResponseEntity<String> handleFileUpload(
