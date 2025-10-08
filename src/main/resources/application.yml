@@ -46,7 +46,7 @@ springdoc:
     filter: true
     display-request-duration: true
   packages-to-scan: com.example.proxy_rest_template.controller  # Исправлено на org.example
-  paths-to-match: /api/**
+  paths-to-match: /**
 
 #file:
 #  upload-dir: ./uploads
